@@ -1,14 +1,18 @@
 const X = "X";
 const O = "O";
 
+// Essa matriz utiliza a mesma ideia do Sudoku, a soma em horizontal, vertical e diagonal sempre dá 15
 const matrix =  [[2,9,4],
                  [7,5,3],
                  [6,1,8]];
 
 var rodada = 0
-var pontosX = 0
-var pontosO = 0
 var jogoContinua = true
+
+/* (rodada%2) = resto 0 ou resto 1, índice 0 ou índice 1
+   Variáveis exclusivas de cada jogador */
+const simbolos = [X,O]
+var pontos = [0,0]
 
 function reiniciarJogo() {
     // Esse comando simplesmente recarrega a página
@@ -19,22 +23,24 @@ function selecionarArea(posicaoLinha, posicaoColuna) {
     // Se jogo ainda não foi finalizado, então continua
     if (jogoContinua) {
 
-        // Verifica quem está jogando
-        if (rodada%2 == 0) {
+        // Seleciona o simbolo e os pontos do jogador atual, variável usada só para simplificar a leitura
+        simbolo = escolhas[rodada%2]
 
-            desenharSimbolo(X, posicaoLinha, posicaoColuna)
-            pontosX = calculaJogada(X, pontosX, posicaoLinha-1, posicaoColuna-1)
+        // Desenha o simbolo na tela
+        desenharSimbolo(simbolo, posicaoLinha, posicaoColuna)
+
+        // Calcula os pontos da casa escolhida e verifica vitória
+        pontos[rodada%2] = calculaJogada(simbolo, pontos[rodada%2], posicaoLinha-1, posicaoColuna-1)
+        
+        // Passa para o próximo jogador
+        if (simbolo == "X") {
             marcarJogadorAtivo(O)
-
         } else {
-
-            desenharSimbolo(O, posicaoLinha, posicaoColuna)
-            pontosO = calculaJogada(O, pontosO, posicaoLinha-1, posicaoColuna-1)
             marcarJogadorAtivo(X)
         }
 
+        // Conta uma rodada
         rodada++
-
     }
 }
 
