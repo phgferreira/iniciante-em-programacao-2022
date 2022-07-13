@@ -11,7 +11,8 @@ var pontosO = 0
 var jogoContinua = true
 
 function reiniciarJogo() {
-    
+    // Esse comando simplesmente recarrega a página
+    window.location.reload();
 }
 
 function selecionarArea(posicaoLinha, posicaoColuna) {
