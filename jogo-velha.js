@@ -8,30 +8,33 @@ const matrix =  [[2,9,4],
 var rodada = 0
 var pontosX = 0
 var pontosO = 0
+var jogoContinua = true
 
 function reiniciarJogo() {
     
 }
 
 function selecionarArea(posicaoLinha, posicaoColuna) {
-    console.log('Rodada: ' + rodada)
-    
-    // Verifica quem está jogando
-    if (rodada%2 == 0) {
-        desenharSimbolo(X, posicaoLinha, posicaoColuna)
-        pontosX = calculaJogada(X, pontosX, posicaoLinha-1, posicaoColuna-1)
+    // Se jogo ainda não foi finalizado, então continua
+    if (jogoContinua) {
 
-        // Próximo jogador
-        marcarJogadorAtivo(O)
-    } else {
-        desenharSimbolo(O, posicaoLinha, posicaoColuna)
-        pontosO = calculaJogada(O, pontosO, posicaoLinha-1, posicaoColuna-1)
+        // Verifica quem está jogando
+        if (rodada%2 == 0) {
 
-        // Próximo jogador
-        marcarJogadorAtivo(X)
+            desenharSimbolo(X, posicaoLinha, posicaoColuna)
+            pontosX = calculaJogada(X, pontosX, posicaoLinha-1, posicaoColuna-1)
+            marcarJogadorAtivo(O)
+
+        } else {
+
+            desenharSimbolo(O, posicaoLinha, posicaoColuna)
+            pontosO = calculaJogada(O, pontosO, posicaoLinha-1, posicaoColuna-1)
+            marcarJogadorAtivo(X)
+        }
+
+        rodada++
+
     }
-
-    rodada++
 }
 
 // Essa função calcula o peso de cada casa
@@ -39,9 +42,13 @@ function calculaJogada(simbolo, pontos, linha, coluna) {
     pontos += matrix[linha][coluna]
 
     /* Se ambos os jogadores não tiver jogado pelo menos 2 vezes cada então não pode ter vitória
-       Se a soma do peso das casas for = 15 então ganhou */
+       Se a soma do peso das casas for igual a 15, então ganhou */
     if (rodada > 3 && pontos == 15){
+
+        // Declara vitorioso e encerra o jogo
         exibirResultado('Vitória do ' + simbolo)
+        jogoContinua = false
+
     }
     /* Se a situação atual não se enquadra em cima e os 15 pontos foram atingidos ou ultrapassado então
        esse foi uma jogada inválida e deve voltar atras apenas nos calculos e não no tabuleiro */
