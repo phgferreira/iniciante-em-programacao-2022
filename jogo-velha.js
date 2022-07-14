@@ -24,7 +24,7 @@ function selecionarArea(posicaoLinha, posicaoColuna) {
     if (jogoContinua) {
 
         // Seleciona o simbolo e os pontos do jogador atual, variável usada só para simplificar a leitura
-        simbolo = escolhas[rodada%2]
+        simbolo = simbolos[rodada%2]
 
         // Desenha o simbolo na tela
         desenharSimbolo(simbolo, posicaoLinha, posicaoColuna)
