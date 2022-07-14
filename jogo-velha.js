@@ -35,6 +35,10 @@ function selecionarArea(posicaoLinha, posicaoColuna) {
 
         // Conta uma rodada
         rodada++
+
+        if (rodada == 9) {
+            declaraEmpate()
+        }
     }
 }
 
@@ -60,4 +64,8 @@ function verificaJogada(simbolo, linha, coluna) {
 function declaraVitoria(simbolo) {
     exibirResultado('Vitória do ' + simbolo)
     jogoContinua = false
+}
+
+function declaraEmpate() {
+    exibirResultado('DEU VELHA!')
 }
