@@ -15,8 +15,8 @@ function reiniciarJogo() {
 }
 
 function selecionarArea(posicaoLinha, posicaoColuna) {
-    // Se jogo ainda não foi finalizado, então continua
-    if (jogoContinua) {
+    // Se jogo ainda não foi finalizado e a casa escolhida está vazia então continua com o jogo
+    if (jogoContinua && matriz[posicaoLinha-1][posicaoColuna-1] == "") {
 
         // Inidice do jogador atual, tem o objetivo de substituir o se igual a X ou se igual a O
         indice = rodada%2
