@@ -56,3 +56,5 @@ marcarJogadorAtivo(simbolo);
 ```
 
 Essas funções estão no arquivo `jogo.js` mas você não precisa alterá-lo.
+
+#Testando `exigência de commits assinados` na branch main
