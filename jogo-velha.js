@@ -2,7 +2,7 @@ const X = "X";
 const O = "O";
 const simbolos = [X,O]
 
-var matrix = [["","",""],
+var matriz = [["","",""],
               ["","",""],
               ["","",""]]
 
@@ -23,22 +23,41 @@ function selecionarArea(posicaoLinha, posicaoColuna) {
 
         // Desenha o simbolo na tela e na matriz
         desenharSimbolo(simbolos[indice], posicaoLinha, posicaoColuna)
-        matrix[posicaoLinha-1][posicaoColuna-1] = simbolos[indice]
+        matriz[posicaoLinha-1][posicaoColuna-1] = simbolos[indice]
 
         // Se ambos já jogaram 2 vezes então podemos começar a verificar um vencedor
         if (rodada > 3) {
-            // Verifica vencedor
+            verificaJogada(simbolos[indice], posicaoLinha-1, posicaoColuna-1)
         }
 
         // Passa para o próximo jogador
-        if (indice == 0) {
-            marcarJogadorAtivo(O)
-        } else {
-            marcarJogadorAtivo(X)
-        }
+        passaAVez(indice)
 
         // Conta uma rodada
         rodada++
     }
 }
 
+function passaAVez(indice) {
+    if (indice == 0) {
+        marcarJogadorAtivo(O)
+    } else {
+        marcarJogadorAtivo(X)
+    }
+}
+
+function verificaJogada(simbolo, linha, coluna) {
+    // Com base na jogada mais recente, abaixo estão as possibilidades de vitória
+    if ((matriz[linha][0] == matriz[linha][1] && matriz[linha][1] == matriz[linha][2]) ||
+        (matriz[0][coluna] == matriz[1][coluna] && matriz[1][coluna] == matriz[2][coluna]) ||
+        (matriz[0][0] == matriz[1][1] && matriz[1][1] == matriz[2][2]) ||
+        (matriz[2][0] == matriz[1][1] && matriz[1][1] == matriz[0][2])) {
+
+            declaraVitoria(simbolo)
+    }
+}
+
+function declaraVitoria(simbolo) {
+    exibirResultado('Vitória do ' + simbolo)
+    jogoContinua = false
+}
