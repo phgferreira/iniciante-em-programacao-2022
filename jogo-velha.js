@@ -36,7 +36,8 @@ function selecionarArea(posicaoLinha, posicaoColuna) {
         // Conta uma rodada
         rodada++
 
-        if (rodada == 9) {
+        // Se chegou no final e o jogo ainda continua então declara empate
+        if (rodada == 9 && jogoContinua) {
             declaraEmpate()
         }
     }
